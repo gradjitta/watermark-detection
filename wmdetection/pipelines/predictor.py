@@ -50,6 +50,7 @@ class WatermarksPredictor:
         input_img = self.classifier_transforms(pil_image).float().unsqueeze(0)
         outputs = self.wm_model(input_img.to(self.device))
         result = torch.max(outputs, 1)[1].cpu().reshape(-1).tolist()[0]
+        print(outputs)
         return result
         
     def run(self, files, num_workers=8, bs=8, pbar=True):
